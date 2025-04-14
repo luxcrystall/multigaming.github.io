@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekskul IT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@3.0.0/dist/full.css">
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen py-10">
+    <!-- Homepage -->
+    <section id="homepage" class="fade-in show text-center">
+        <h1 class="text-4xl font-bold text-blue-600 mb-6">Ekskul IT</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Divisi Programming -->
+            <div class="card w-60 bg-white shadow-xl p-4">
+                <img src="programming-logo.png" alt="Programming" class="w-24 mx-auto">
+                <h2 class="text-xl font-bold mt-2">Programming</h2>
+                <button onclick="showDetail('programming')" class="btn btn-primary mt-2">Lihat Detail</button>
+            </div>
+            <!-- Divisi Multimedia -->
+            <div class="card w-60 bg-white shadow-xl p-4">
+                <img src="multimedia-logo.png" alt="Multimedia" class="w-24 mx-auto">
+                <h2 class="text-xl font-bold mt-2">Multimedia</h2>
+                <button onclick="showDetail('multimedia')" class="btn btn-primary mt-2">Lihat Detail</button>
+            </div>
+            <!-- Divisi E-Sport -->
+            <div class="card w-60 bg-white shadow-xl p-4">
+                <img src="esport-logo.png" alt="E-Sport" class="w-24 mx-auto">
+                <h2 class="text-xl font-bold mt-2">E-Sport</h2>
+                <button onclick="showDetail('esport')" class="btn btn-primary mt-2">Lihat Detail</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Detail Divisi -->
+    <section id="detail" class="hidden fade-in text-center bg-white p-8 shadow-xl max-w-3xl">
+        <h1 id="detail-title" class="text-3xl font-bold text-blue-600 mb-4"></h1>
+        <div class="flex justify-center my-4">
+            <img id="detail-logo" src="" alt="Logo Divisi" class="w-24">
+        </div>
+        <div id="detail-content"></div>
+        <button onclick="showHomepage()" class="btn btn-error mt-4">Kembali</button>
+    </section>
+    
+    <script>
+        const divisiDetails = {
+            programming: {
+                title: "Divisi Programming",
+                logo: "programming-logo.png",
+                content: `
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Deskripsi</div>
+                        <div class='collapse-content'>
+                            <p>Divisi Programming adalah tempat belajar dan mengembangkan skill coding, baik untuk web development, aplikasi, hingga AI.</p>
+                        </div>
+                    </div>
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Kegiatan</div>
+                        <div class='collapse-content'>
+                            <ul class='list-disc pl-5'>
+                                <li>Belajar basic-basic coding website seperti HTML, CSS, dan JavaScript</li>
+                                <li>Mengerjakan proyek bersama</li>
+                                <li>Workshop dan mentoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Tools yang Digunakan</div>
+                        <div class='collapse-content'>
+                            <ul class='list-disc pl-5'>
+                                <li>laptop</li>
+                                <li>VS Code</li>
+                                <li>framework coding</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            multimedia: {
+                title: "Divisi Multimedia",
+                logo: "multimedia-logo.png",
+                content: `
+                <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Deskripsi</div>
+                        <div class='collapse-content'>
+                            <p>Divisi Multimedia adalah tempat belajar dan mengembangkan skill di bidang fotografi, videografi, dan juga editing.</p>
+                        </div>
+                    </div>
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Kegiatan</div>
+                        <div class='collapse-content'>
+                            <ul class='list-disc pl-5'>
+                                <li>Belajar fotografi</li>
+                                <li>Belajar videografi</li>
+                                <li>Belajar editing konten (foto/video)</li>
+                                <li>Mendokumentasikan acara-acara sekolah</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Tools yang Digunakan</div>
+                        <div class='collapse-content'>
+                            <ul class='list-disc pl-5'>
+                                <li>kamera</li>
+                                <li>laptop</li>
+                                <li>capcut/adobe premiere</li>
+                                <li>canva</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            esport: {
+                title: "Divisi E-Sport",
+                logo: "esport-logo.png",
+                content: `
+                <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Deskripsi</div>
+                        <div class='collapse-content'>
+                            <p>Divisi E-Sport adalah tempat belajar dan mengembangkan skill gaming, terutama pada game-game mobile. Divisi ini merupakan divisi baru di ekskul ITWELVE.</p>
+                        </div>
+                    </div>
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Kegiatan</div>
+                        <div class='collapse-content'>
+                            <ul class='list-disc pl-5'>
+                                <li>Belajar taktik & strategi dalam bermain game</li>
+                                <li>Melatih teamwork yang baik dalam bermain game</li>
+                                <li>Mengikuti lomba E-Sport</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='collapse bg-blue-100 mb-4'>
+                        <input type='checkbox'> 
+                        <div class='collapse-title text-xl font-medium'>Tools yang Digunakan</div>
+                        <div class='collapse-content'>
+                            <ul class='list-disc pl-5'>
+                                <li>Handphone</li>
+                                <li>Game mobile</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function showDetail(divisi) {
+            document.getElementById("homepage").classList.add("hidden");
+            document.getElementById("detail").classList.remove("hidden");
+            document.getElementById("detail-title").innerText = divisiDetails[divisi].title;
+            document.getElementById("detail-logo").src = divisiDetails[divisi].logo;
+            document.getElementById("detail-content").innerHTML = divisiDetails[divisi].content;
+            setTimeout(() => {
+                document.getElementById("detail").classList.add("show");
+            }, 50);
+        }
+        
+        function showHomepage() {
+            document.getElementById("detail").classList.add("hidden");
+            document.getElementById("homepage").classList.remove("hidden");
+            setTimeout(() => {
+                document.getElementById("homepage").classList.add("show");
+            }, 50);
+        }
+    </script>
+</body>
+</html>
